@@ -10,7 +10,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'member',
+    loadChildren: () => import('./pages/portal/member/member.module').then( m => m.MemberPageModule)
   },
+
 ];
 
 @NgModule({
