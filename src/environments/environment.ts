@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  maxInput: 100,
+  maxZip: 5,
+  maxInputIban: 22,
+  maxInputSocialSecurityNumber: 12,
+  maxInputTaxIdentification: 14,
 };
 
 /*

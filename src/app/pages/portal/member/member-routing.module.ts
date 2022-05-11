@@ -5,12 +5,19 @@ import { MemberPage } from './member.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: MemberPage
+    path: 'member/menu',
+    component: MemberPage,
+    children: [
+      {
+        path: 'data',
+        loadChildren: () => import('./data/data.module').then( m => m.DataPageModule)
+      }
+
+    ]
   },
   {
-    path: 'data',
-    loadChildren: () => import('./data/data.module').then( m => m.DataPageModule)
+    path: 'member',
+    redirectTo: 'member/menu/data'
   }
 ];
 

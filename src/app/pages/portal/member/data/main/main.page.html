@@ -1,9 +1,400 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>main</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="input-background">
+  <ion-grid>
+    <p *ngIf="true">test</p>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Team-Mitglied</span>
+      </div>
 
-<ion-content>
+      <form [formGroup]="fgTeamMember">
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Vorname*</ion-label>
+              <ion-textarea #vPrename rows="1" auto-grow="true" type="text" formControlName="cPrename"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cPrename.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cPrename.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Nachname*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cSurname"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cSurname.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cSurname.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-row-toggle">
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item>
+              <ion-label position="floating" class="input-label">Titel*</ion-label>
+              <ion-select [(ngModel)]="oTitle" [okText]="'Übernehmen'" [cancelText]="'Abbrechen'"
+                          [selectedText]="oTitle" (ionChange)="onChange()">
+                <ion-select-option *ngFor="let cTitle of lTitles"
+                                   [value]="cTitle.cName">{{cTitle.cName}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span *ngIf="bSubmitted && oTitle === null" class="input-invalid">Pflichtfeld</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item class="ion-item-toggle-check">
+              <ion-label [ngClass]="{'ion-text-wrap' : true, 'ion-label-toggle' : true}">Persönliche Anrede*</ion-label>
+              <ion-toggle [(ngModel)]="bPersonally" [ngModelOptions]="{standalone: true}"
+                          (ionChange)="onToggleFormally($event)"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item lines="full">
+            <ion-label class="input-label" position="floating">Geburtstag*</ion-label>
+            <ion-textarea #vName rows="1" auto-grow="true" type="text" formControlName="dBirthday"
+                          (ionChange)="onChangeAddress()"></ion-textarea>
+          </ion-item>
+          <ion-datetime first-day-of-week="1"></ion-datetime>
+        </ion-row>
+      </form>
+      <!-- test -->
+    </div>
+  </ion-grid>
 
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Kontaktdaten</span>
+      </div>
+
+      <form [formGroup]="fgTeamMember">
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">E-Mail Adresse (Privat)*</ion-label>
+              <ion-textarea #vName rows="1" auto-grow="true" type="text" formControlName="cEmail"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cEmail.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">E-Mail Adresse (Mobile-Box)*</ion-label>
+              <ion-textarea [disabled]="true" #vSurname rows="1" auto-grow="true" type="text"
+                            formControlName="cMailCompany" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cMailCompany.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cMailCompany.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Trello Username*</ion-label>
+              <ion-textarea [disabled]="true" #vPrename rows="1" auto-grow="true" type="text"
+                            formControlName="cTrelloUsername" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cTrelloUsername.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cTrelloUsername.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <!-- <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Passwort*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cIban" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cPassword.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cPassword.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col> -->
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Mobilfunknummer*</ion-label>
+              <ion-textarea #vPrename rows="1" auto-grow="true" type="text" formControlName="cPhoneMobile"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cPhoneMobile.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cPhoneMobile.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Festnetznummer*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cSurname"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cPhoneFixedLine.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cPhoneFixedLine.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Adresse</span>
+      </div>
+
+      <form [formGroup]="fgTeamMember">
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Straße*</ion-label>
+              <ion-textarea #vPrename rows="1" auto-grow="true" type="text" formControlName="cShippingStreet"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cShippingStreet.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cShippingStreet.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Hausnummer*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cShippingStreetNumber"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cShippingStreetNumber.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cShippingStreetNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Postleitzahl*</ion-label>
+              <ion-textarea [maxlength]="5" #vPrename rows="1" auto-grow="true" type="text"
+                            formControlName="cShippingZip" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cShippingZip.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cShippingZip.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxZip}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Stadt*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cShippingCity"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cShippingCity.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cShippingCity.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item>
+              <ion-label position="floating">Bundesland*</ion-label>
+              <ion-select [(ngModel)]="oState" [okText]="'Übernehmen'" [cancelText]="'Abbrechen'"
+                          [selectedText]="oState !== null ? oState.cNameLocale : ''"
+                          (ionChange)="onChangeAddress()">
+                <ion-select-option *ngFor="let oState of lStates"
+                                   [value]="oState">{{oState.cNameLocale}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span *ngIf="bSubmitted && oState === null" class="input-invalid">Pflichtfeld</span>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Jobdaten</span>
+      </div>
+      <form [formGroup]="fgTeamMember">
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Beginn des Arbeitsverhältnis (Datum)*</ion-label>
+              <ion-textarea [disabled]="true" #vPrename rows="1" auto-grow="true" type="text" formControlName="cBank"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.dStart.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.dStart.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item>
+              <ion-label position="floating">Beschäftigungsverhältnis*</ion-label>
+              <ion-select [disabled]="true" [(ngModel)]="oRelationship" [okText]="'Übernehmen'"
+                          [cancelText]="'Abbrechen'"
+                          [selectedText]="oRelationship !== null ? oRelationship.tRelationship : ''"
+                          (ionChange)="onChangeAddress()">
+                <ion-select-option *ngFor="let oRelationship of lRelationship"
+                                   [value]="oRelationship">{{oRelationship.tRelationship}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span *ngIf="bSubmitted && oState === null" class="input-invalid">Pflichtfeld</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Arbeitsstunden pro Woche*</ion-label>
+              <ion-textarea [disabled]="true" #vSurname rows="1" auto-grow="true" type="text"
+                            formControlName="nHoursPerWeek" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.nHoursPerWeek.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.nHoursPerWeek.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Vergütung pro Stunde*</ion-label>
+              <ion-textarea [disabled]="true" #vSurname rows="1" auto-grow="true" type="text"
+                            formControlName="nHoursPerWeek" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.nWagePerHour.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.nWagePerHour.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Bruttogehalt*</ion-label>
+              <ion-textarea [disabled]="true" #vSurname rows="1" auto-grow="true" type="text"
+                            formControlName="nGrossSalary" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.nGrossSalary.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.nGrossSalary.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Urlaubstage pro Jahr*</ion-label>
+              <ion-textarea [disabled]="true" #vSurname rows="1" auto-grow="true" type="text"
+                            formControlName="nVacation"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.nVacation.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.nVacation.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Steuer</span>
+      </div>
+      <form [formGroup]="fgTeamMember">
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Steueridentifikationsnummer*</ion-label>
+              <ion-textarea [maxlength]="14" #vPrename rows="1" auto-grow="true" type="text"
+                            formControlName="cTaxIdentification" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cTaxIdentification.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cTaxIdentification.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputTaxIdentification}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Krankenkasse*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cHealthInsurance"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cHealthInsurance.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cHealthInsurance.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Sozisalversicherungsnummer*</ion-label>
+              <ion-textarea [maxlength]="12" #vPrename rows="1" auto-grow="true" type="text"
+                            formControlName="cSocialSecurtiyNumber" (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cSocialSecurtiyNumber.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cSocialSecurtiyNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputSocialSecurityNumber}}
+              Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Nationalität*</ion-label>
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cNationality"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cNationality.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cNationality.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+              Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Konfession*</ion-label>
+              <ion-textarea #vName rows="1" auto-grow="true" type="text" formControlName="tConfession"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.tConfession.errors?.required"
+                  class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.tConfession.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Bankdaten</span>
+      </div>
+      <form [formGroup]="fgTeamMember">
+        <ion-row>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Bankname*</ion-label>
+              <ion-textarea #vPrename rows="1" auto-grow="true" type="text" formControlName="cBank"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cBank.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cBank.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Bankverbindung*</ion-label>
+              <ion-textarea [maxlength]="22" #vSurname rows="1" auto-grow="true" type="text" formControlName="cIban"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.cIban.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cIban.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInputIban}} Zeichen überschritten</span>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </ion-grid>
 </ion-content>
+

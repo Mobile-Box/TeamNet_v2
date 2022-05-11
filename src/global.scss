@@ -1,14 +1,3 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 
@@ -24,3 +13,912 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import 'theme/variables';
+
+// +++DIMEN+++
+
+// Text
+$sizeTextInformation: 1rem;
+$textSize: 0.95rem;
+$textSizeItemTitle: 1.1rem;
+$textSizeItemSubtitle: 0.8rem;
+$sizeTextHead: 1.5rem;
+$textSizeList: 0.95rem;
+$textSizeNote: 0.8rem;
+$textHeight: 1.3;
+$noteHeight: 1.2rem;
+$listHeight: 1.75rem;
+
+// Block
+$blockMarginOutside: 1.25rem;
+
+// Radius
+$borderRadius: 0.6rem;
+
+// +++COLORS+++
+
+// Text
+$textPrimary: #212121;
+$textSecondary: #757575;
+$textTertiary: #979797;
+
+// Icon
+$colorIcon: #BDBDBD;
+
+// General
+$white: #ffffff;
+$green: #8BC34A;
+$greenLight: #a5d274;
+$red: #c34a4a;
+$colorBackground: #f1f1f1;
+$colorTransparent: rgba(0, 0, 0, 0);
+
+// Special
+$divider: #bdbdbd;
+$colorItem: #f6f6f6;
+
+
+// +++TAGS+++
+
+// Ionic
+ion-grid {
+  width: 80% !important;
+}
+
+ion-title {
+  color: $white;
+  font-weight: 500;
+}
+
+ion-label {
+  padding-bottom: 0.25rem;
+}
+
+ion-row {
+  align-items: flex-start;
+}
+
+// select
+ion-select {
+  max-width: 90% !important;
+}
+
+ion-select::part(text) {
+  white-space: normal;
+}
+
+ion-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: $green;
+}
+
+ion-label {
+  --color: #757575 !important;
+  white-space: normal !important;
+}
+
+ion-button {
+  //width: 100%;
+  --border-radius: 0.6rem;
+  border-radius: $borderRadius;
+  white-space: normal;
+  height: fit-content;
+  --padding-bottom: 0.7rem !important;
+  --padding-top: 0.8rem !important;
+}
+
+ion-item {
+  --border-color: #cbcbcb;
+  padding: 0.4rem 1rem 0.4rem 1rem;
+}
+
+ion-textarea {
+}
+
+ion-back-button {
+  color: white;
+}
+
+ion-toggle {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+  --background-checked: #d9d9d9;
+  --background: #d9d9d9;
+  margin-bottom: 0.75rem;
+  --handle-background: white;
+  --handle-background-checked: #8BC34A;
+}
+
+ion-toolbar ion-menu-button {
+  color: var(--ion-color-primary-contrast);
+}
+
+// Html
+
+p {
+  //line-height: 14px;
+}
+
+b {
+  font-weight: 500;
+}
+
+ion-textarea {
+  margin-top: 0.05rem !important;
+}
+
+ul {
+  list-style: none; /* Remove default bullets */
+}
+
+ul li::before {
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: $green; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1.5rem; /* Also needed for space (tweak if needed) */
+  margin-left: -1.5em; /* Also needed for space (tweak if needed) */
+}
+
+// Dark-Mode
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    ion-item {
+      --background: black;
+    }
+
+    ion-button {
+      --background: #8BC34A;
+    }
+
+    ion-list {
+      --background: black !important;
+      background: black !important;
+    }
+
+    .block-element {
+      background: black !important;
+    }
+
+    .block-element-single {
+      background: black !important;
+    }
+
+    .block-element-bottom {
+      background: black !important;
+    }
+
+    .block-element-top {
+      background: black !important;
+    }
+
+    .ion-button-two-inside {
+      --background: black !important;
+    }
+
+    .ion-button-three-inside {
+      --background: black !important;
+    }
+  }
+}
+
+
+// CLASSES
+
+// Table
+.ion-col-table-header {
+  background: $greenLight;
+  color: $white !important;
+  border-color: $divider !important;
+  border-width: 1px !important;
+  border-style: solid;
+  margin-bottom: -1px !important;
+  margin-left: -1px !important;
+}
+
+.ion-col-table {
+  border-color: $divider !important;
+  border-width: 1px !important;
+  border-style: solid;
+  margin-bottom: -1px !important;
+  margin-left: -1px !important;
+  color: $textSecondary !important;
+}
+
+.ion-col-table-selected {
+  color: $green;
+}
+
+.ion-row-table {
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.ion-grid-table {
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+}
+
+// Text
+
+.text-head {
+  color: #8BC34A;
+  font-size: $sizeTextHead !important;
+  display: inline;
+  font-weight: 300;
+}
+
+.text-list {
+  color: $textSecondary;
+  font-size: $textSize !important;
+  line-height: $listHeight !important;
+}
+
+.text {
+  font-size: $textSize;
+  color: $textPrimary;
+  line-height: $textHeight;
+}
+
+.text-secondary {
+  font-size: $textSize;
+  color: $textSecondary;
+  line-height: $textHeight;
+}
+
+.text-information-pointer {
+  font-size: $sizeTextInformation;
+  color: $textSecondary;
+  line-height: $textHeight;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+
+.text-information {
+  font-size: $sizeTextInformation;
+  color: $textSecondary;
+  line-height: $textHeight;
+}
+
+.text-list {
+  font-size: $textSizeList;
+  color: $textSecondary;
+  line-height: $listHeight;
+}
+
+.note-important {
+  color: $red;
+  font-size: $textSizeNote;
+}
+
+
+.link-one {
+  color: $green;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.link-two {
+  color: $textSecondary;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.note {
+  color: $textTertiary;
+  font-size: $textSizeNote;
+  line-height: $noteHeight;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+// Icon
+
+.icon-head {
+  margin-left: 1rem;
+  color: $colorIcon;
+  align-self: center;
+  cursor: pointer;
+}
+
+.icon-head:hover {
+  color: $green;
+}
+
+// Buttons
+
+.ion-row-buttons {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.ion-col-button {
+  align-self: center;
+  text-align: center;
+}
+
+.ion-button-outside {
+  width: 100%;
+  margin: 0rem auto;
+}
+
+.ion-button-two-inside {
+  --color: #8BC34A;
+  --background: $colorTransparent !important;
+  --ion-text-color: #8BC34A;
+  border: 1px solid $green;
+  --box-shadow: #00;
+  display: block;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.ion-button-long-text {
+  line-height: $textHeight;
+}
+
+
+.ion-button-one-inside {
+  display: block;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.ion-button-three-inside {
+  display: block;
+  --color: #8BC34A;
+  --background: $colorTransparent !important;
+  --ion-text-color: #8BC34A;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  --box-shadow: #00;
+}
+
+.ion-button-three-inside-delete {
+  display: block;
+  --color: #c34a4a;
+  --background: $colorTransparent !important;
+  --ion-text-color: #c34a4a;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  --box-shadow: #00;
+}
+
+.button-four {
+  display: block;
+  --color: #afafaf;
+  --background: white !important;
+  --ion-text-color: #afafaf;
+  --box-shadow: white;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  border: 1px solid #afafaf;
+  --box-shadow: #00;
+}
+
+.button-four:hover {
+  --color: #8BC34A;
+  --ion-text-color: #8BC34A;
+  border: 1px solid $green;
+}
+
+// Form
+
+.no-underline {
+  --highlight-background: transparent;
+}
+
+.law-label {
+  --color: #212121 !important;
+  --margin-bottom: 8px;
+  font-style: italic;
+}
+
+.input-background {
+  --background: #f1f1f1;
+  background: $colorBackground;
+}
+
+.ion-row-toggle {
+  align-items: flex-end;
+}
+
+.ion-label-toggle {
+  margin-bottom: 0.75rem;
+  margin-left: 1rem;
+}
+
+.ion-item-toggle-check {
+  display: flex;
+  margin-left: -1rem;
+  padding-top: 1rem;
+}
+
+.ion-label-check {
+  margin-left: 1rem;
+}
+
+.input-invalid {
+  color: $red;
+  font-size: $textSizeNote;
+  display: block;
+  margin-right: 1rem;
+  margin-left: 2rem;
+}
+
+.password-invalid {
+  color: #c34a4a;
+  font-size: $textSizeNote;
+}
+
+.password-valid {
+  color: #8BC34A;
+  font-size: $textSizeNote;
+}
+
+.password-inactive {
+  color: #BDBDBD;
+  font-size: $textSizeNote;
+}
+
+.input-info {
+  color: $textTertiary;
+  font-size: $textSizeNote;
+  display: block;
+  margin-right: 1rem;
+  margin-left: 2rem;
+}
+
+// Background, Block & Grid
+
+.ios ion-grid {
+  width: 95% !important;
+}
+
+.wp ion-grid {
+  width: 95% !important;
+}
+
+.ion-grid { // only used once
+  --padding-left: 0rem !important;
+  --margin-left: 0rem !important;
+  margin-left: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+.block-button-outside {
+  display: flex;
+  width: 100%;
+  background: $colorBackground;
+  padding-right: 1rem;
+}
+
+.block-button-outside-top-content {
+  display: flex;
+  width: 100%;
+  background: $colorBackground;
+  padding-top: 1.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.block-button-outside-bottom-content {
+  display: flex;
+  width: 100%;
+  background: $colorBackground;
+  padding-top: 0rem;
+  padding-bottom: 2rem;
+}
+
+
+.block-button-outside-bottom {
+  display: flex;
+  width: 100%;
+  background: $colorBackground;
+  padding-right: 0.85rem;
+  margin-left: -0.1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 1.75rem;
+}
+
+.ios .block-button-outside-bottom {
+  margin-left: 0rem;
+  padding-right: 0rem;
+}
+
+.block-button-outside-top {
+  display: flex;
+  width: 100%;
+  background: #f6f6f6;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.block-text-information {
+  display: flex;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+  margin-top: 1.5rem;
+}
+
+.block-text-information-center {
+  display: flex;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+  justify-content: center;
+}
+
+.block-text {
+  display: block;
+  margin-top: 1.25rem;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+}
+
+.simple-background {
+  background: $colorBackground;
+}
+
+.block-head {
+  display: flex;
+  align-items: center;
+  margin: 0.9rem $blockMarginOutside 0.5rem $blockMarginOutside;
+}
+
+.block-note {
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+}
+
+.block-element {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 0.75rem 0rem 0.75rem 0rem;
+}
+
+.block-element-top {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 1.75rem 0rem 0.75rem 0rem;
+}
+
+.block-element-bottom {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 0.75rem 0rem 1.75rem 0rem;
+}
+
+.block-element-single {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 1.75rem 0rem 1.75rem 0rem;
+}
+
+.image-block {
+  margin: 2rem $blockMarginOutside 1rem $blockMarginOutside;
+}
+
+// Alert & Toast
+
+.my-alert .alert-wrapper {
+  justify-content: center;
+
+  .alert-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .alert-sub-title {
+    font-size: $sizeTextInformation;
+    color: $textSecondary;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .alert-message {
+    font-size: $textSize;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: justify;
+    color: $textPrimary;
+  }
+
+  .alert-title {
+    font-weight: 500;
+    font-size: $sizeTextHead;
+    color: $textPrimary;
+    text-align: center;
+  }
+}
+
+/*
+.alert-wrapper {
+  width: 50% !important;
+  max-width: 100% !important;
+}
+*/
+
+
+.my-select .alert-wrapper {
+  .alert-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+// text-wrap for alert labels
+.alert-tappable.alert-radio {
+  height: auto;
+  contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md {
+  white-space: pre-line;
+}
+
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: pre-line;
+}
+
+/*
+.ion-select-option .alert-wrapper {
+  .alert-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  width: 100% !important;
+  max-width: 100% !important;
+}*/
+
+.my-toast {
+  --background: #565650;
+  --border-color: #FF;
+  --border-radius: 0.6rem;
+  --border-style: solid;
+  --border-width: 0px;
+  font-size: $sizeTextInformation;
+  --button-color: #8BC34A;
+  --color: #e7e7e7;
+  text-align: center;
+  --width: 60% !important;
+  --max-width: 60% !important;
+  --min-width: 60% !important;
+}
+
+// Footer
+
+.footer {
+  display: inline-flex;
+  transform: translateY(-100%);
+  flex-direction: column;
+  background-color: #a5d274;
+  height: 50px !important;
+  min-height: 50px !important;
+  bottom: 0px !important;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.footer-element {
+  margin-top: 0.125rem;
+  font-size: 10px;
+  display: flex;
+  align-items: center !important;
+  color: white;
+  font-weight: 300;
+}
+
+.footer-element-link {
+  cursor: pointer;
+}
+
+.footer-element-link:hover {
+  text-decoration: underline;
+}
+
+.footer-element-title {
+  margin-top: 0.125rem;
+  font-size: 12px;
+  display: flex;
+  align-items: center !important;
+  color: white;
+  font-weight: 400;
+}
+
+.footer-content {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+  contain: size style layout;
+  display: flex; // added by me
+  flex-direction: column; // added by me
+}
+
+.lower-content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  align-self: end;
+  width: 100%;
+  flex-grow: 1;
+}
+
+// Toolbar
+
+.toolbar-subtitle {
+  margin: 0.125rem 0rem 0rem 0rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.toolbar-icon {
+  color: white;
+}
+
+.toolbar-buttons-right {
+  margin-right: 0.5rem;
+}
+
+
+// Item
+
+.ion-row-header {
+  margin-bottom: 1.25rem;
+}
+
+.item-background {
+  //border: 1px solid $divider;
+  height: auto !important;
+  width: auto !important;
+  background-color: #fafafa;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+  margin-bottom: 2rem;
+  //border-style: solid;
+  //border-color: $green;
+  //border-width: 1px;
+  border-radius: $borderRadius;
+  padding: $blockMarginOutside;
+  vertical-align: center !important;
+  align-items: center;
+}
+
+.item-left {
+  display: flex;
+  flex-flow: row;
+  align-self: stretch;
+  align-content: stretch !important;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.item-middle {
+  height: available!important;
+  display: flex!important;
+  flex-direction: column;
+  flex-flow: column;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.item-right {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom:0.5rem;
+}
+
+.item-divider-vertical-left {
+  width: 0.1rem;
+  height: 2rem;
+  background: $divider;
+  display: flex !important;
+  text-align: right !important;
+  margin-left: 1.25rem;
+
+}
+
+.item-divider-horizontal {
+  height: 0.05rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background: $white;
+}
+
+.item_note {
+  width: 100% !important;
+  text-align: center !important;
+  font-size: $textSizeNote;
+  color: $divider;
+  font-style: italic;
+}
+
+.item-title {
+  font-size: $textSizeItemTitle;
+  font-weight: 400;
+  color: $textPrimary;
+  margin-bottom: 0.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center!important;
+  justify-self: center!important;
+}
+
+.item-subtitle {
+  font-size: $textSizeItemSubtitle;
+  color: $textSecondary;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.item-left-text {
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center!important;
+  justify-self: center!important;
+  color: $green;
+  font-weight: 400;
+  font-size: $textSizeItemTitle;
+}
+
+.item-icon-delete {
+  color: $red;
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.item-icon-default {
+  color: $green;
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+// List
+
+.list-block {
+  margin-top: 1.5rem;
+}

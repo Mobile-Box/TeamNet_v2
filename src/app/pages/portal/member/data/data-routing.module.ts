@@ -5,12 +5,18 @@ import { DataPage } from './data.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: DataPage
+    path: 'tabs',
+    component: DataPage,
+    children: [
+      {
+        path: 'main',
+        loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
+      }
+    ]
   },
   {
-    path: 'main',
-    loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
+    path: '',
+    redirectTo: 'tabs/main'
   }
 ];
 
