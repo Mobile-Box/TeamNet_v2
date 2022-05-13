@@ -12,4 +12,7 @@ export class DataPage implements OnInit {
   ngOnInit() {
   }
 
+  onLogOut() {
+
+  }
 }
