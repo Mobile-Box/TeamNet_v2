@@ -9,6 +9,12 @@ export const environment = {
   maxInputIban: 22,
   maxInputSocialSecurityNumber: 12,
   maxInputTaxIdentification: 14,
+  maxInputGrossSalary: 6,
+  maxInputWagePerHour: 3,
+  maxInputHoursPerWeek: 3,
+  maxInputBirthday: 10,
+  maxInputStart: 10,
+  maxInputEnd: 10,
 };
 
 /*
