@@ -1,6 +1,5 @@
 <ion-content class="input-background">
   <ion-grid>
-    <p *ngIf="true">test</p>
     <div class="block-element-top">
       <div class="block-head">
         <span class="text-head">Team-Mitglied</span>
@@ -33,7 +32,7 @@
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item>
               <ion-label position="floating" class="input-label">Titel*</ion-label>
-              <ion-select [(ngModel)]="oTitle" [okText]="'Übernehmen'" [cancelText]="'Abbrechen'"
+              <ion-select [(ngModel)]="oTitle" [ngModelOptions]="{standalone: true}" [okText]="'Übernehmen'" [cancelText]="'Abbrechen'"
                           [selectedText]="oTitle" (ionChange)="onChange()">
                 <ion-select-option *ngFor="let cTitle of lTitles"
                                    [value]="cTitle.cName">{{cTitle.cName}}</ion-select-option>
@@ -49,16 +48,21 @@
             </ion-item>
           </ion-col>
         </ion-row>
+        <!--
         <ion-row>
           <ion-item lines="full">
             <ion-label class="input-label" position="floating">Geburtstag*</ion-label>
             <ion-textarea #vName rows="1" auto-grow="true" type="text" formControlName="dBirthday"
                           (ionChange)="onChangeAddress()"></ion-textarea>
           </ion-item>
+          <span *ngIf="bSubmitted && errorControl.cBirthday.errors?.required"
+                class="input-invalid">Pflichtfeld</span>
+          <span *ngIf="bSubmitted && errorControl.dBirthday.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputBirthday}}
+            Zeichen überschritten</span>
           <ion-datetime first-day-of-week="1"></ion-datetime>
         </ion-row>
+        -->
       </form>
-      <!-- test -->
     </div>
   </ion-grid>
 
@@ -105,14 +109,14 @@
             <span *ngIf="bSubmitted && errorControl.cTrelloUsername.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
               Zeichen überschritten</span>
           </ion-col>
-          <!-- <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item lines="full">
               <ion-label class="input-label" position="floating">Passwort*</ion-label>
               <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cIban" (ionChange)="onChangeAddress()"></ion-textarea>
             </ion-item>
             <span *ngIf="bSubmitted && errorControl.cPassword.errors?.required" class="input-invalid">Pflichtfeld</span>
             <span *ngIf="bSubmitted && errorControl.cPassword.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
-          </ion-col> -->
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -129,7 +133,7 @@
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item lines="full">
               <ion-label class="input-label" position="floating">Festnetznummer*</ion-label>
-              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cSurname"
+              <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cPhoneFixedLine"
                             (ionChange)="onChangeAddress()"></ion-textarea>
             </ion-item>
             <span *ngIf="bSubmitted && errorControl.cPhoneFixedLine.errors?.required"
@@ -199,7 +203,7 @@
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item>
               <ion-label position="floating">Bundesland*</ion-label>
-              <ion-select [(ngModel)]="oState" [okText]="'Übernehmen'" [cancelText]="'Abbrechen'"
+              <ion-select [(ngModel)]="oState" [ngModelOptions]="{standalone: true}" [okText]="'Übernehmen'" [cancelText]="'Abbrechen'"
                           [selectedText]="oState !== null ? oState.cNameLocale : ''"
                           (ionChange)="onChangeAddress()">
                 <ion-select-option *ngFor="let oState of lStates"
@@ -218,23 +222,35 @@
         <span class="text-head">Jobdaten</span>
       </div>
       <form [formGroup]="fgTeamMember">
+        <!--
         <ion-row>
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item lines="full">
               <ion-label class="input-label" position="floating">Beginn des Arbeitsverhältnis (Datum)*</ion-label>
-              <ion-textarea [disabled]="true" #vPrename rows="1" auto-grow="true" type="text" formControlName="cBank"
+              <ion-textarea [disabled]="true" #vPrename rows="1" auto-grow="true" type="text" formControlName="dStart"
                             (ionChange)="onChangeAddress()"></ion-textarea>
             </ion-item>
             <span *ngIf="bSubmitted && errorControl.dStart.errors?.required" class="input-invalid">Pflichtfeld</span>
             <span *ngIf="bSubmitted && errorControl.dStart.errors?.maxlength"
-                  class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
+                  class="input-invalid">Maximal-Länge von {{maxInputStart}} Zeichen überschritten</span>
+          </ion-col>
+          <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+            <ion-item lines="full">
+              <ion-label class="input-label" position="floating">Ende des Arbeitsverhältnis (Datum)*</ion-label>
+              <ion-textarea [disabled]="true" #vPrename rows="1" auto-grow="true" type="text" formControlName="dEnd"
+                            (ionChange)="onChangeAddress()"></ion-textarea>
+            </ion-item>
+            <span *ngIf="bSubmitted && errorControl.dEnd.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.dEnd.errors?.maxlength"
+                  class="input-invalid">Maximal-Länge von {{maxInputEnd}} Zeichen überschritten</span>
           </ion-col>
         </ion-row>
+        -->
         <ion-row>
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item>
               <ion-label position="floating">Beschäftigungsverhältnis*</ion-label>
-              <ion-select [disabled]="true" [(ngModel)]="oRelationship" [okText]="'Übernehmen'"
+              <ion-select [disabled]="true" [(ngModel)]="oRelationship" [ngModelOptions]="{standalone: true}" [okText]="'Übernehmen'"
                           [cancelText]="'Abbrechen'"
                           [selectedText]="oRelationship !== null ? oRelationship.tRelationship : ''"
                           (ionChange)="onChangeAddress()">
@@ -254,7 +270,7 @@
             </ion-item>
             <span *ngIf="bSubmitted && errorControl.nHoursPerWeek.errors?.required"
                   class="input-invalid">Pflichtfeld</span>
-            <span *ngIf="bSubmitted && errorControl.nHoursPerWeek.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+            <span *ngIf="bSubmitted && errorControl.nHoursPerWeek.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputHoursPerWeek}}
               Zeichen überschritten</span>
           </ion-col>
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -265,7 +281,7 @@
             </ion-item>
             <span *ngIf="bSubmitted && errorControl.nWagePerHour.errors?.required"
                   class="input-invalid">Pflichtfeld</span>
-            <span *ngIf="bSubmitted && errorControl.nWagePerHour.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+            <span *ngIf="bSubmitted && errorControl.nWagePerHour.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputWagePerHour}}
               Zeichen überschritten</span>
           </ion-col>
         </ion-row>
@@ -278,7 +294,7 @@
             </ion-item>
             <span *ngIf="bSubmitted && errorControl.nGrossSalary.errors?.required"
                   class="input-invalid">Pflichtfeld</span>
-            <span *ngIf="bSubmitted && errorControl.nGrossSalary.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}}
+            <span *ngIf="bSubmitted && errorControl.nGrossSalary.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputGrossSalary}}
               Zeichen überschritten</span>
           </ion-col>
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -396,5 +412,18 @@
       </form>
     </div>
   </ion-grid>
+  <ion-grid>
+    <div class="block-element">
+      <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</ion-row>
+    </div>
+  </ion-grid>
 </ion-content>
+
+<div class="input-background">
+  <ion-grid>
+    <div class="block-button-outside-bottom">
+      <ion-button [disabled]="!bChanged" class="ion-button-outside" (click)="onSave()">Speichern</ion-button>
+    </div>
+  </ion-grid>
+</div>
 
