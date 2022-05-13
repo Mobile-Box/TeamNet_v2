@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AlertController, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-main',
@@ -24,8 +26,10 @@ export class MainPage implements OnInit {
   public maxInputEnd = environment.maxInputEnd;
 
   // Urls
-  private kTeamMember = "37";
+  private kTeamMember = "38";
   private urlTeamMember = 'team/main/';
+  private urlSave = 'team/main';
+  private urlRegionStates = 'region/states';
 
   // FormBuilder
   fgTeamMember = this.formBuilder.group({
@@ -54,6 +58,7 @@ export class MainPage implements OnInit {
   });
 
   // Variables
+  bChanged = true;
   dataTeamMember;
   bSubmitted = false;
   oState = null;
@@ -62,20 +67,26 @@ export class MainPage implements OnInit {
   lRelationship = [];
   oTitle = null;
   lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
-  bPersonally: boolean = true;
+  bAddressFormally: boolean = true;
 
 
-  constructor(private connApi: ConnApiService, private formBuilder: FormBuilder) { }
+  constructor(private connApi: ConnApiService, private formBuilder: FormBuilder, public alertController: AlertController, public toastController: ToastController) { }
 
   ngOnInit() {
+
     // teamMember
     this.connApi.safeGet(this.urlTeamMember+this.kTeamMember).subscribe((response) => {
       this.dataTeamMember = response.body;
-      let teamMember = response.body;
-      console.log(teamMember);
+
+      // controls
+      this.fgTeamMember.controls['cPrename'].setValue(this.dataTeamMember.cPrename);
+
+      // console
+      console.log(this.dataTeamMember);
     })
 
-    this.fgTeamMember.controls['cPrename'].setValue("Test-Vorname");
+    // region
+    this.loadStates();
   }
 
   buttonClick() {
@@ -100,9 +111,12 @@ export class MainPage implements OnInit {
   }
 
   onSave() {
-    this.bSubmitted = true;
+
+
+    //this.bSubmitted = true;
 
     // check for invalid input
+    /*
     if (!this.fgTeamMember.valid || this.oState == null || this.oRelationship == null || this.oTitle == null) {
       console.log(this.oState);
       console.log(this.oRelationship);
@@ -110,13 +124,18 @@ export class MainPage implements OnInit {
       this.alertInvalid();
       return;
     }
+     */
+
 
     // prepare data
     let collector =
       {
-        cPreName: this.fgTeamMember.get('cPreName').value,
+        kTeam: this.kTeamMember,
+        cPrename: this.fgTeamMember.get('cPrename').value,
+        /*
         cSurName: this.fgTeamMember.get('cSurname').value,
-        cMail: this.fgTeamMember.get('cSurname').value,
+        cTitle: this.oTitle.cTitle,
+        bAddressFormally: this.bAddressFormally ? 1 : 0,
         cMailCompany: this.fgTeamMember.get('cMailCompany').value,
         cTrelloUsername: this.fgTeamMember.get('cTrelloUsername').value,
         cPhoneMobile: this.fgTeamMember.get('cPhoneMobile').value,
@@ -136,22 +155,75 @@ export class MainPage implements OnInit {
         cBank: this.fgTeamMember.get('cBank').value,
         cIban: this.fgTeamMember.get('cIban').value,
         nVacation: this.fgTeamMember.get('nVacation').value,
+        dBirthday: this.dataTeamMember.dBirthday,
+        dStart: this.dataTeamMember.dStart,
+        dEnd: this.dataTeamMember.dEnd,
+         */
+
 
       };
-    console.log(collector);
+
+    //console.log(collector);
 
     // send data
     this.connApi.safePost(this.urlSave, collector).subscribe((data: HttpResponse<any>) => {
-      if (data.status == 200) {
-        this.toastSaved();
-      }
+      this.toastSaved();
+      console.log("TTTEST");
     }, error => {
-      console.log(error);
-      if (error.status == 406) {
-        this.alertCollectorNameForgiven();
-      }
+      //console.log(error);
     });
 
+
+
+  }
+
+  loadStates() {
+      this.connApi.safeGet(this.urlRegionStates+'/1').subscribe((response : HttpResponse<any>) => {
+        this.lStates = response.body
+        console.log(response);
+        // state
+        this.lStates.forEach(state => {
+          if (state.id == this.dataTeamMember.kState) {
+            this.oState = state;
+          }
+        })
+      }, error => {
+        //console.log(error);
+      })
+  }
+
+  // Toasts
+  async toastSaved() {
+    const toast = await this.toastController.create({
+      message: 'Deine Daten wurden erfolgreich gespeichert.',
+      duration: 2500,
+      cssClass: 'my-toast',
+      position: 'bottom'
+    });
+    await toast.present();
+  }
+
+  // Alerts
+  async alertInvalid() {
+    const alert = await this.alertController.create({
+      header: 'Fehlerhafte Eingabe',
+      message: 'Bitte überprüfe deine Daten und korrigiere diese an den markierten Stellen.',
+      cssClass: 'my-alert',
+      buttons: ['Ok']
+    });
+
+    await alert.present();
+  }
+
+  async alertCollectorNameForgiven() {
+    const alert = await this.alertController.create({
+      header: 'Sammlername vergeben',
+      message: 'Ihre Daten konnten nicht gespeichert werden. Bitte geben Sie einen anderen Sammlernamen ein.',
+      cssClass: 'my-alert',
+      buttons: ['Ok']
+    });
+
+    await alert.present();
   }
 
 }
