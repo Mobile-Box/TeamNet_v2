@@ -1,9 +1,45 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>data</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" class="toolbar-buttons-right">
+      <ion-button (click)="onLogOut()" fill="clear">
+        <mat-icon class="toolbar-icon" slot="icon-only" name="log-out" matTooltip="Ausloggen">logout</mat-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Meine Daten</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-tabs>
+
+    <ion-tab-bar slot="top">
+
+      <ion-tab-button tab="main">
+        <ion-icon name="albums"></ion-icon>
+        <ion-label>Stammdaten</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="work">
+        <ion-icon name="share"></ion-icon>
+        <ion-label>Arbeitszeit/Tätigkeit</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="holiday">
+        <ion-icon name="locate"></ion-icon>
+        <ion-label>Urlaub</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="absence">
+        <ion-icon name="heart"></ion-icon>
+        <ion-label>Ausfälle</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="settings">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Einstellungen</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+
+  </ion-tabs>
 
 </ion-content>

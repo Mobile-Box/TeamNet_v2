@@ -1,9 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>member</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-menu contentId="main-content" type="overlay">
+  <ion-content class="my-background">
+    <div class="nav-header">
+      <img class="image" src="assets/images/logo_mobile_box_white.png">
+      <div class="my-block-text">
+        <span class="nav-title">Handysammlerportal</span>
+        <span class="nav-subtitle">Team</span>
+      </div>
+    </div>
+    <ion-list id="inbox-list">
+      <ion-menu-toggle *ngFor="let p of appPages; let i = index">
+        <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+          <ion-icon [routerLinkActive]="['selected-icon']" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+          <ion-label [routerLinkActive]="['selected-label']">{{ p.title }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-router-outlet id="main-content"></ion-router-outlet>
