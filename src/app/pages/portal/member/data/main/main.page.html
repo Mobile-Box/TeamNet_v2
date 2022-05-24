@@ -43,7 +43,7 @@
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <ion-item class="ion-item-toggle-check">
               <ion-label [ngClass]="{'ion-text-wrap' : true, 'ion-label-toggle' : true}">Persönliche Anrede*</ion-label>
-              <ion-toggle [(ngModel)]="bAddressFormally" [ngModelOptions]="{standalone: true}"
+              <ion-toggle [(ngModel)]="!bAddressFormally" [ngModelOptions]="{standalone: true}"
                           (ionChange)="onToggleFormally($event)"></ion-toggle>
             </ion-item>
           </ion-col>
@@ -347,10 +347,10 @@
             <ion-item lines="full">
               <ion-label class="input-label" position="floating">Sozisalversicherungsnummer*</ion-label>
               <ion-textarea [maxlength]="12" #vPrename rows="1" auto-grow="true" type="text"
-                            formControlName="cSocialSecurtiyNumber" (ionChange)="onChangeAddress()"></ion-textarea>
+                            formControlName="cSocialSecurityNumber" (ionChange)="onChangeAddress()"></ion-textarea>
             </ion-item>
-            <span *ngIf="bSubmitted && errorControl.cSocialSecurtiyNumber.errors?.required" class="input-invalid">Pflichtfeld</span>
-            <span *ngIf="bSubmitted && errorControl.cSocialSecurtiyNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputSocialSecurityNumber}}
+            <span *ngIf="bSubmitted && errorControl.cSocialSecurityNumber.errors?.required" class="input-invalid">Pflichtfeld</span>
+            <span *ngIf="bSubmitted && errorControl.cSocialSecurityNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInputSocialSecurityNumber}}
               Zeichen überschritten</span>
           </ion-col>
           <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">

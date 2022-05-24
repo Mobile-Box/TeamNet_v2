@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import {CommonPage} from "../../common/CommonPage";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-data',
   templateUrl: './data.page.html',
   styleUrls: ['./data.page.scss'],
 })
-export class DataPage implements OnInit {
+export class DataPage extends CommonPage implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public router: Router) {
+    super(router);
   }
 
-  onLogOut() {
-
+  ngOnInit() {
   }
 }

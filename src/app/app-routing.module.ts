@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AppComponent} from './app.component';
+import {MemberPage} from './pages/portal/member/member.page';
 
 const routes: Routes = [
   {path: 'app-root', component: AppComponent},
   {
     path: 'member',
-    loadChildren: () => import('./pages/portal/member/member-routing.module').then( m => m.MemberPageRoutingModule)
+    loadChildren: () => import('./pages/portal/member/member.module').then( m => m.MemberPageModule)
   },
   {
     path: 'main',
