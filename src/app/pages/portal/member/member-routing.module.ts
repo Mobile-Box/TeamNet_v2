@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'member',
     redirectTo: 'member/menu/data'
+  },  {
+    path: 'controlling',
+    loadChildren: () => import('./controlling/controlling.module').then( m => m.ControllingPageModule)
   }
+
 ];
 
 @NgModule({
