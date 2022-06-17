@@ -1,9 +1,71 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>teamcontrolling</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="input-background">
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Filter</span>
+      </div>
+      <ion-row>
+        <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+          <ion-item>
+            <ion-label class="input-label">Zeitraum</ion-label>
+            <ion-select [(ngModel)]="oTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
+                        [selectedText]="oTime.name" (ionChange)="onFilterChange()">
+              <ion-select-option *ngFor="let oTime of lTime"
+                                 [value]="oTime">{{oTime.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
 
-<ion-content>
+        <ion-col *ngIf="oTime.key !== 'total'" size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+          <ion-item>
+            <ion-label class="input-label">Auswahl</ion-label>
+            <ion-select [(ngModel)]="oChoice" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
+                        [selectedText]="oChoice.name" (ionChange)="onFilterChange()">
+              <ion-select-option *ngFor="let oChoice of lChoice"
+                                 [value]="oChoice">{{oChoice.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <!--
+        <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+          <ion-item>
+            <ion-label class="input-label">Gruppieren nach</ion-label>
+            <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
+                        [selectedText]="cTime.name" (ionChange)="onTime($event)">
+              <ion-select-option *ngFor="let cTime of lTime"
+                                 [value]="cTime">{{cTime.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        -->
+      </ion-row>
+    </div>
+  </ion-grid>
+
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Tabelle</span>
+      </div>
+    </div>
+  </ion-grid>
+
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Diagramm</span>
+      </div>
+    </div>
+  </ion-grid>
+
+  <ion-grid>
+    <div class="block-element-top">
+      <div class="block-head">
+        <span class="text-head">Min,Max,Avg</span>
+      </div>
+    </div>
+  </ion-grid>
+
 
 </ion-content>
+

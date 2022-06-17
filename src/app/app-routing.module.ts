@@ -10,6 +10,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/portal/member/member.module').then( m => m.MemberPageModule)
   },
   {
+    path: 'controlling-team',
+    loadChildren: () => import('./pages/portal/member/controlling/teamcontrolling/teamcontrolling.module').then( m => m.TeamcontrollingPageModule)
+  },
+  {
     path: 'main',
     loadChildren: () => import('./pages/portal/member/data/main/main.module').then( m => m.MainPageModule)
   },

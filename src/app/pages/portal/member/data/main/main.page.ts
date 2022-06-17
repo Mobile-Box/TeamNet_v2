@@ -77,6 +77,7 @@ export class MainPage implements OnInit {
 
     // teamMember
     this.connApi.safeGet(this.urlTeamMember+this.kTeamMember).subscribe((response) => {
+      console.log(response.body);
       this.dataTeamMember = response.body;
 
       // controls
