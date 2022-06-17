@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
@@ -71,7 +71,7 @@ export class MainPage implements OnInit {
   dBirthday: string = null;
 
 
-  constructor(private connApi: ConnApiService, private formBuilder: FormBuilder, public alertController: AlertController, public toastController: ToastController) { }
+  constructor(private connApi: ConnApiService, private formBuilder: UntypedFormBuilder, public alertController: AlertController, public toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -119,6 +119,8 @@ export class MainPage implements OnInit {
 
     // region
     this.loadStates();
+
+    console.log("test!");
   }
 
   buttonClick() {

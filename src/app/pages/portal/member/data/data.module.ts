@@ -7,6 +7,7 @@ import {MatIconModule} from '@angular/';
 
 import { DataPageRoutingModule } from './data-routing.module';
 
+
 import { DataPage } from './data.page';
 
 @NgModule({

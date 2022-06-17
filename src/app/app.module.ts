@@ -12,10 +12,9 @@ import {MemberPageModule} from './pages/portal/member/member.module';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [MemberPageModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule,],
-  providers: [SplashScreen, StatusBar,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [MemberPageModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule,],
+    providers: [SplashScreen, StatusBar, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
