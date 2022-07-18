@@ -1,0 +1,59 @@
+.nav-header {
+  display: flex;
+  flex-direction: column;
+  height: 35%;
+  align-items: flex-start;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background: linear-gradient(135deg, #8BC34A, #a5d274) !important;
+}
+
+.my-background {
+  --background: linear-gradient(90deg, white, white) !important;
+}
+
+ion-list {
+  height: 65%;
+}
+
+ion-content {
+  //--overflow: hidden;
+}
+
+.image {
+  height: 70%;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.my-block-text {
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.nav-title {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.nav-subtitle {
+  color: white;
+  font-size: 0.85rem;
+  opacity: 0.875;
+}
+
+.selected-icon {
+  color: #8BC34A !important;
+}
+
+.selected-label {
+  color: #8BC34A !important;
+  font-weight: 500;
+}
+
+
+

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end" class="toolbar-buttons-right">
+      <ion-button (click)="onLogOut()" fill="clear">
+        <mat-icon class="toolbar-icon" slot="icon-only" name="log-out" matTooltip="Ausloggen">logout</mat-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Controlling</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-tabs>
+
+    <ion-tab-bar slot="top">
+
+      <ion-tab-button tab="teamcontrolling">
+        <ion-icon name="people-outline"></ion-icon>
+        <ion-label>Team</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="membercontrolling">
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Team-Mitglied</ion-label>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+
+  </ion-tabs>
+
+</ion-content>

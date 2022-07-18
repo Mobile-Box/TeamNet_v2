@@ -1,9 +1,9 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { AlertController, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
-import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-main',
@@ -49,7 +49,7 @@ export class MainPage implements OnInit {
     nGrossSalary: ['', [Validators.required, Validators.maxLength(this.maxInputGrossSalary)]],
     cTaxIdentification: ['', [Validators.required, Validators.maxLength(this.maxInputTaxIdentification)]],
     cHealthInsurance: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
-    cSocialSecurtiyNumber: ['', [Validators.required, Validators.maxLength(this.maxInputSocialSecurityNumber)]],
+    cSocialSecurityNumber: ['', [Validators.required, Validators.maxLength(this.maxInputSocialSecurityNumber)]],
     cNationality: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
     tConfession: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
     cBank: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
@@ -68,18 +68,50 @@ export class MainPage implements OnInit {
   oTitle = null;
   lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
   bAddressFormally: boolean = true;
+  dBirthday: string = null;
 
 
-  constructor(private connApi: ConnApiService, private formBuilder: FormBuilder, public alertController: AlertController, public toastController: ToastController) { }
+  constructor(private connApi: ConnApiService, private formBuilder: UntypedFormBuilder, public alertController: AlertController, public toastController: ToastController) { }
 
   ngOnInit() {
 
     // teamMember
     this.connApi.safeGet(this.urlTeamMember+this.kTeamMember).subscribe((response) => {
+      console.log(response.body);
       this.dataTeamMember = response.body;
 
       // controls
       this.fgTeamMember.controls['cPrename'].setValue(this.dataTeamMember.cPrename);
+      this.fgTeamMember.controls['cSurname'].setValue(this.dataTeamMember.cSurname);
+      this.fgTeamMember.controls['cMailCompany'].setValue(this.dataTeamMember.cMailCompany);
+      this.fgTeamMember.controls['cEmail'].setValue(this.dataTeamMember.cEmail);
+      this.fgTeamMember.controls['cTrelloUsername'].setValue(this.dataTeamMember.cTrelloUsername);
+      this.fgTeamMember.controls['cPhoneMobile'].setValue(this.dataTeamMember.cPhoneMobile);
+      this.fgTeamMember.controls['cPhoneFixedLine'].setValue(this.dataTeamMember.cPhoneFixedLine);
+      this.fgTeamMember.controls['cShippingStreet'].setValue(this.dataTeamMember.cShippingStreet);
+      this.fgTeamMember.controls['cShippingStreetNumber'].setValue(this.dataTeamMember.cShippingStreetNumber);
+      this.fgTeamMember.controls['cShippingZip'].setValue(this.dataTeamMember.cShippingZip);
+      this.fgTeamMember.controls['cShippingCity'].setValue(this.dataTeamMember.cShippingCity);
+      this.fgTeamMember.controls['nHoursPerWeek'].setValue(this.dataTeamMember.nHoursPerWeek);
+      this.fgTeamMember.controls['nWagePerHour'].setValue(this.dataTeamMember.nWagePerHour);
+      this.fgTeamMember.controls['nGrossSalary'].setValue(this.dataTeamMember.nGrossSalary);
+      this.fgTeamMember.controls['cTaxIdentification'].setValue(this.dataTeamMember.cTaxIdentification);
+      this.fgTeamMember.controls['cHealthInsurance'].setValue(this.dataTeamMember.cHealthInsurance);
+      this.fgTeamMember.controls['cSocialSecurityNumber'].setValue(this.dataTeamMember.cSocialSecurityNumber);
+      this.fgTeamMember.controls['cNationality'].setValue(this.dataTeamMember.cNationality);
+      this.fgTeamMember.controls['tConfession'].setValue(this.dataTeamMember.tConfession);
+      this.fgTeamMember.controls['cBank'].setValue(this.dataTeamMember.cBank);
+      this.fgTeamMember.controls['cIban'].setValue(this.dataTeamMember.cIban);
+      this.fgTeamMember.controls['nVacation'].setValue(this.dataTeamMember.nVacation);
+
+      // title
+      this.oTitle = this.dataTeamMember.cTitle;
+
+      // formally
+      this.bAddressFormally = this.dataTeamMember.bAddressFormally == 1;
+
+      // birthday
+      this.dBirthday = this.dataTeamMember.dBirthday;
 
       // console
       console.log(this.dataTeamMember);
@@ -87,6 +119,8 @@ export class MainPage implements OnInit {
 
     // region
     this.loadStates();
+
+    console.log("test!");
   }
 
   buttonClick() {
@@ -103,7 +137,8 @@ export class MainPage implements OnInit {
   }
 
   onToggleFormally($event: any) {
-
+    if (!this.bChanged) this.bChanged = true;
+    this.bAddressFormally = !($event['detail']['checked']);
   }
 
   onChange() {
@@ -132,8 +167,36 @@ export class MainPage implements OnInit {
       {
         kTeam: this.kTeamMember,
         cPrename: this.fgTeamMember.get('cPrename').value,
+        cSurname: this.fgTeamMember.get('cSurname').value,
+        dBirthday: this.dBirthday,
+        cTitle: this.oTitle,
+        cEmail: this.fgTeamMember.get('cEmail').value,
+        cMailCompany: this.fgTeamMember.get('cMailCompany').value,
+        cTrelloUsername: this.fgTeamMember.get('cTrelloUsername').value,
+        cPhoneMobile: this.fgTeamMember.get('cPhoneMobile').value,
+        cPhoneFixedLine: this.fgTeamMember.get('cPhoneFixedLine').value,
+        cShippingStreet: this.fgTeamMember.get('cShippingStreet').value,
+        cShippingStreetNumber: this.fgTeamMember.get('cShippingStreetNumber').value,
+        cShippingZip: this.fgTeamMember.get('cShippingZip').value,
+        cShippingCity: this.fgTeamMember.get('cShippingCity').value,
+        kShippingState: this.oState.id,
+        nHoursPerWeek: this.fgTeamMember.get('nHoursPerWeek').value,
+        nWagePerHour: this.fgTeamMember.get('nWagePerHour').value,
+        nGrossSalary: this.fgTeamMember.get('nGrossSalary').value,
+        cTaxIdentification: this.fgTeamMember.get('cTaxIdentification').value,
+        cHealthInsurance: this.fgTeamMember.get('cHealthInsurance').value,
+        cSocialSecurityNumber: this.fgTeamMember.get('cSocialSecurityNumber').value,
+        cNationality: this.fgTeamMember.get('cNationality').value,
+        tConfession: this.fgTeamMember.get('tConfession').value,
+        cBank: this.fgTeamMember.get('cBank').value,
+        cIban: this.fgTeamMember.get('cIban').value,
+        nVacation: this.fgTeamMember.get('nVacation').value,
+        bAddressFormally: this.bAddressFormally ? 1 : 0,
+
+
+
+
         /*
-        cSurName: this.fgTeamMember.get('cSurname').value,
         cTitle: this.oTitle.cTitle,
         bAddressFormally: this.bAddressFormally ? 1 : 0,
         cMailCompany: this.fgTeamMember.get('cMailCompany').value,
@@ -170,7 +233,7 @@ export class MainPage implements OnInit {
       this.toastSaved();
       console.log("TTTEST");
     }, error => {
-      //console.log(error);
+      console.log(error);
     });
 
 
@@ -182,15 +245,20 @@ export class MainPage implements OnInit {
         this.lStates = response.body
         console.log(response);
         // state
-        this.lStates.forEach(state => {
-          if (state.id == this.dataTeamMember.kState) {
-            this.oState = state;
-          }
-        })
+        if (this.dataTeamMember !== null && this.dataTeamMember.hasOwnProperty('kShippingState')) {
+          this.lStates.forEach(state => {
+            if (state.id == this.dataTeamMember.kShippingState) {
+              this.oState = state;
+            }
+          })
+        }
+
       }, error => {
         //console.log(error);
       })
   }
+
+
 
   // Toasts
   async toastSaved() {

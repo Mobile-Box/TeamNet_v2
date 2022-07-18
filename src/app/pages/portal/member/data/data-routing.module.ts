@@ -16,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
+    pathMatch: 'full',
     redirectTo: 'tabs/main'
   }
 ];

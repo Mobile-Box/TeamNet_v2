@@ -1,12 +1,36 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AppComponent} from './app.component';
+import {MemberPage} from './pages/portal/member/member.page';
 
 const routes: Routes = [
   {path: 'app-root', component: AppComponent},
   {
+    path: '',
+    redirectTo: 'member/menu/data/tabs/main',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'member/menu/data/tabs/main',
+    pathMatch: 'full'
+  },
+  {
     path: 'member',
-    loadChildren: () => import('./pages/portal/member/member-routing.module').then( m => m.MemberPageRoutingModule)
+    loadChildren: () => import('./pages/portal/member/member.module').then( m => m.MemberPageModule)
+  },
+
+
+
+
+
+  {
+    path: 'controlling-team',
+    loadChildren: () => import('./pages/portal/member/controlling/teamcontrolling/teamcontrolling.module').then( m => m.TeamcontrollingPageModule)
+  },
+  {
+    path: 'controlling-member',
+    loadChildren: () => import('./pages/portal/member/controlling/membercontrolling/membercontrolling.module').then( m => m.MembercontrollingPageModule)
   },
   {
     path: 'main',
