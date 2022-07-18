@@ -245,7 +245,7 @@ export class MainPage implements OnInit {
         this.lStates = response.body
         console.log(response);
         // state
-        if (this.dataTeamMember.hasOwnProperty('kShippingState')) {
+        if (this.dataTeamMember !== null && this.dataTeamMember.hasOwnProperty('kShippingState')) {
           this.lStates.forEach(state => {
             if (state.id == this.dataTeamMember.kShippingState) {
               this.oState = state;

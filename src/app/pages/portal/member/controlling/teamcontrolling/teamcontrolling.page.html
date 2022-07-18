@@ -26,26 +26,65 @@
             </ion-select>
           </ion-item>
         </ion-col>
-        <!--
+
         <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
           <ion-item>
             <ion-label class="input-label">Gruppieren nach</ion-label>
-            <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
-                        [selectedText]="cTime.name" (ionChange)="onTime($event)">
-              <ion-select-option *ngFor="let cTime of lTime"
-                                 [value]="cTime">{{cTime.name}}</ion-select-option>
+            <ion-select [(ngModel)]="oGroup" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
+                        [selectedText]="oGroup.name" (ionChange)="onFilterChange()">
+              <ion-select-option *ngFor="let oGroup of lGroup"
+                                 [value]="oGroup">{{oGroup.name}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
-        -->
       </ion-row>
     </div>
   </ion-grid>
 
   <ion-grid>
-    <div class="block-element-top">
-      <div class="block-head">
-        <span class="text-head">Tabelle</span>
+    <div class="block-element">
+      <div class="block-head" *ngIf="lData != null && lData.length > 0">
+        <span class="text-head">Auswertung</span>
+      </div>
+      <div class="ion-grid-table" *ngIf="lData != null && lData.length > 0">
+        <ion-row class="ion-row-table">
+          <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="4" size-xs="4" [ngClass]="'ion-col-table-header'">
+            <div>
+              {{oGroup.name}}
+            </div>
+          </ion-col>
+          <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="4" size-xs="4" [ngClass]="'ion-col-table-header'">
+            <div>
+              Erfassung
+            </div>
+          </ion-col>
+          <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="4" size-xs="4" [ngClass]="'ion-col-table-header'">
+            <div>
+              Prüfen
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let row of lData" class="ion-row-table">
+          <ion-col [ngClass]="'ion-col-table'" size-xl="4" size-lg="4" size-md="4" size-sm="4" size-xs="4">
+            <div [ngClass]="{bold : row.nGroup == null, 'ion-col-table-selected' : isSelf(row.id)}">
+              {{row.nGroup != null ? getGroup(row.nGroup) : 'Summe'}}
+            </div>
+          </ion-col>
+          <ion-col [ngClass]="'ion-col-table'" size-xl="4" size-lg="4" size-md="4" size-sm="4" size-xs="4">
+            <div>
+
+            </div>
+          </ion-col>
+          <ion-col [ngClass]="'ion-col-table'" size-xl="4" size-lg="4" size-md="4" size-sm="4" size-xs="4">
+            <div [ngClass]="{bold : row.nProcessed == null, 'ion-col-table-selected' : isSelf(row.id)}">
+              {{row.nProcessed != null ? row.nProcessed : 'Summe'}}
+              <!-- {{getNumber(row.nDevices | number:'1.0':'en-US')}} -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="block-text-information-center" *ngIf="lData != null && lData.length == 0">
+        <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
       </div>
     </div>
   </ion-grid>
@@ -55,7 +94,13 @@
       <div class="block-head">
         <span class="text-head">Diagramm</span>
       </div>
-    </div>
+        <div class="diagram">
+          <canvas id="myChart"></canvas>
+        </div>
+        <script src="./teamcontrolling.page.ts">
+        </script>
+      </div>
+
   </ion-grid>
 
   <ion-grid>

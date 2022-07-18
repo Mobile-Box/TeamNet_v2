@@ -11,17 +11,18 @@ const routes: Routes = [
       {
         path: 'data',
         loadChildren: () => import('./data/data.module').then( m => m.DataPageModule)
+      },
+      {
+        path: 'controlling',
+        loadChildren: () => import('./controlling/controlling.module').then( m => m.ControllingPageModule)
       }
-
     ]
   },
   {
     path: 'member',
     redirectTo: 'member/menu/data'
-  },  {
-    path: 'controlling',
-    loadChildren: () => import('./controlling/controlling.module').then( m => m.ControllingPageModule)
-  }
+  },
+
 
 ];
 
